@@ -1,0 +1,97 @@
+## Battle-Metrics | Shroud Player Card
+A responsive, single-page web application that displays PUBG player statistics (featuring Shroud's demo stats) with interactive documentation, FAQ, and system status panels. Built with vanilla HTML, CSS, and JavaScript.
+
+## Table of Contents
+Overview
+
+Features
+
+Demo Data
+
+File Structure
+
+Installation & Usage
+
+LocalStorage Caching
+
+## Overview
+Battle-Metrics is a front-end demo application that simulates fetching PUBG API player statistics. It showcases:
+
+// A beautifully styled player stats card for "Shroud"
+
+// Collapsible documentation and FAQ panels
+
+// Real-time system status monitoring
+
+// Persistent data storage using browser localStorage
+
+// Fully responsive layout for mobile and desktop
+
+## Features
+Player Card
+
+// Displays lifetime solo stats: kills, wins, top 10s, damage dealt, rounds played
+
+// Specialized metrics: longest kill distance, walk distance, ride distance
+
+Note: Shroud's ride distance is exactly 0m (no vehicle usage - edge case accuracy)
+
+## Interactive Panels
+// Documentation - API reference, endpoint details, integration guide
+
+// FAQ - Common questions about the demo and functionality
+
+// Status - Live system metrics including localStorage status and sync times
+
+
+
+## Demo Data
+The application uses static mock data representing Shroud's statistics:
+
+javascript
+{
+    name: "Shroud",
+    playerId: "account.d50fdc18fcad49c691d38466bed6f8fd",
+    kills: 3,
+    wins: 0,
+    top10s: 0,
+    damageDealt: 300,
+    roundsPlayed: 1,
+    longestKill: 76.34484,
+    walkDistance: 99.900154,
+    rideDistance: 0  // Exact zero value - no vehicle usage
+}
+
+
+##  LocalStorage Caching
+// How It Works
+
+// After clicking "Get Player Info", the player data and timestamp are saved to localStorage
+
+// On page load, the application checks for saved data and restores the card
+
+The "Clear Saved Data" button removes both shroudPlayerCard and lastShroudViewTimestamp keys
+
+// Storage Keys
+// Key	Purpose
+// shroudPlayerCard	Stores player data and display timestamp
+// lastShroudViewTimestamp	Stores ISO timestamp of last view
+// Benefits
+Reduces "API calls" in a real implementation
+
+
+ ## Customization
+// Replace with Real PUBG API
+// To connect to the actual PUBG Developer API:
+
+// Obtain an API key from PUBG Developer Portal
+
+// Modify displayShroudCard() to fetch real player data
+
+// Update the stats mapping to match PUBG API response structure
+
+
+
+
+
+
