@@ -29,9 +29,9 @@ class DictionaryApp {
         this.bindEvents();
         this.updateAllDisplays();
         this.loadTheme();
-        console.log('✅ App initialized successfully');
-        console.log('📊 Favorites loaded:', this.favorites.length);
-        console.log('🕒 History loaded:', this.searchHistory.length);
+        console.log(' App initialized successfully');
+        console.log(' Favorites loaded:', this.favorites.length);
+        console.log('History loaded:', this.searchHistory.length);
     }
 
     cacheElements() {
@@ -222,7 +222,7 @@ class DictionaryApp {
     }
     
     clearAllStorage() {
-        if (confirm('⚠️ WARNING: This will clear ALL your data including favorites, search history, and statistics. This cannot be undone. Are you sure?')) {
+        if (confirm('WARNING: This will clear ALL your data including favorites, search history, and statistics. This cannot be undone. Are you sure?')) {
             localStorage.removeItem('wordly_favorites');
             localStorage.removeItem('wordly_history');
             localStorage.removeItem('wordly_stats');
@@ -271,16 +271,16 @@ class DictionaryApp {
             utterance.volume = 1;
             
             utterance.onstart = () => {
-                this.showMessage(`🔊 Speaking: "${word}"`, 'info');
+                this.showMessage(` Speaking: "${word}"`, 'info');
             };
             
             utterance.onerror = () => {
-                this.showMessage('⚠️ Unable to speak the word', 'error');
+                this.showMessage(' Unable to speak the word', 'error');
             };
             
             window.speechSynthesis.speak(utterance);
         } else {
-            this.showMessage('⚠️ Your browser does not support speech synthesis', 'error');
+            this.showMessage(' Your browser does not support speech synthesis', 'error');
         }
     }
     
@@ -296,7 +296,7 @@ class DictionaryApp {
                 console.error('Audio playback failed:', error);
                 this.speakWord(word);
             });
-            this.showMessage('🔊 Playing pronunciation audio...', 'info');
+            this.showMessage(' Playing pronunciation audio...', 'info');
         } else {
             this.speakWord(word);
         }
@@ -311,7 +311,7 @@ class DictionaryApp {
             this.searchBtn.innerHTML = '<span class="loading"></span> Searching...';
             this.searchBtn.disabled = true;
         } else {
-            this.searchBtn.innerHTML = '🔍 Search Word';
+            this.searchBtn.innerHTML = ' Search Word';
             this.searchBtn.disabled = false;
         }
     }
@@ -362,7 +362,7 @@ class DictionaryApp {
             const data = await response.json();
             this.displayResults(data, word);
             this.addToSearchHistory(word);
-            this.showMessage(`✅ Found definition for "${word}"`, 'success');
+            this.showMessage(` Found definition for "${word}"`, 'success');
             
             if (this.resultsContainer) {
                 this.resultsContainer.style.display = 'block';
@@ -375,7 +375,7 @@ class DictionaryApp {
             if (this.resultsContent) {
                 this.resultsContent.innerHTML = `
                     <div class="message error">
-                        <strong>❌ ${error.message}</strong><br>
+                        <strong> ${error.message}</strong><br>
                         Suggestions: 
                         <ul style="margin-top: 10px; margin-left: 20px;">
                             <li>Check the spelling of the word</li>
@@ -427,18 +427,18 @@ class DictionaryApp {
             <div class="word-header">
                 <div>
                     <div class="word-title" ondblclick="dictionaryApp.speakWord('${this.escapeHtml(word)}', '${speechLang}')">
-                        📖 ${this.escapeHtml(word)}
+                        ${this.escapeHtml(word)}
                     </div>
                     ${phonetic ? `<div class="phonetic">/${this.escapeHtml(phonetic)}/</div>` : ''}
                 </div>
                 <div>
                     <button class="audio-btn" onclick="dictionaryApp.playAudio('${this.escapeHtml(audioUrl || '')}', '${this.escapeHtml(word)}')">
-                        🔊 Listen to Pronunciation
+                        Listen to Pronunciation
                     </button>
                 </div>
             </div>
             <button class="favorite-btn" onclick="dictionaryApp.addToFavorites('${this.escapeHtml(word)}')">
-                ⭐ Add "${this.escapeHtml(word)}" to Favorites
+                 Add "${this.escapeHtml(word)}" to Favorites
             </button>
             <div style="margin-top: 1.5rem;">
         `;
@@ -448,7 +448,7 @@ class DictionaryApp {
             wordData.meanings.forEach((meaning) => {
                 html += `
                     <div class="definition-card">
-                        <div class="part-of-speech">📌 ${this.escapeHtml(meaning.partOfSpeech)}</div>
+                        <div class="part-of-speech"> ${this.escapeHtml(meaning.partOfSpeech)}</div>
                         <ul class="definition-list">
                 `;
                 
@@ -456,7 +456,7 @@ class DictionaryApp {
                     meaning.definitions.slice(0, 3).forEach(def => {
                         html += `<li><strong>Definition:</strong> ${this.escapeHtml(def.definition)}</li>`;
                         if (def.example) {
-                            html += `<div class="example">💡 Example: "${this.escapeHtml(def.example)}"</div>`;
+                            html += `<div class="example"> Example: "${this.escapeHtml(def.example)}"</div>`;
                         }
                     });
                 }
@@ -479,7 +479,7 @@ class DictionaryApp {
         
         html += `
             <p style="font-size: 12px; color: #888; margin-top: 15px;">
-                💡 Tip: Double-click the word to hear it spoken! | Data provided by Free Dictionary API
+                 Tip: Double-click the word to hear it spoken! | Data provided by Free Dictionary API
             </p>
         </div>`;
         
@@ -492,7 +492,7 @@ class DictionaryApp {
             this.favorites.push(word);
             this.saveFavorites();
             this.updateFavoritesList();
-            this.showMessage(`⭐ "${word}" added to favorites!`, 'success');
+            this.showMessage(` "${word}" added to favorites!`, 'success');
         } else {
             this.showMessage(`"${word}" is already in your favorites!`, 'info');
         }
@@ -503,7 +503,7 @@ class DictionaryApp {
         this.favorites = this.favorites.filter(fav => fav !== word);
         this.saveFavorites();
         this.updateFavoritesList();
-        this.showMessage(`🗑️ "${word}" removed from favorites`, 'info');
+        this.showMessage(` "${word}" removed from favorites`, 'info');
     }
     
     // Update favorites list display
@@ -517,7 +517,7 @@ class DictionaryApp {
         
         this.favoritesList.innerHTML = this.favorites.map(word => `
             <li onclick="dictionaryApp.searchFavoriteWord('${this.escapeHtml(word)}')">
-                📖 ${this.escapeHtml(word)}
+                 ${this.escapeHtml(word)}
                 <button class="remove-fav" onclick="event.stopPropagation(); dictionaryApp.removeFromFavorites('${this.escapeHtml(word)}')">✖</button>
             </li>
         `).join('');
@@ -544,5 +544,5 @@ class DictionaryApp {
 let dictionaryApp;
 document.addEventListener('DOMContentLoaded', () => {
     dictionaryApp = new DictionaryApp();
-    console.log('🎉 Dictionary App Ready!');
+    console.log('Dictionary App Ready!');
 });
